@@ -1,0 +1,29 @@
+name: linux-ssh
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set authorized_keys 
+      run: |
+        mkdir -p ~/.ssh
+        echo $AUTH_KEY >> ~/.ssh/authorized_keys
+        chmod 600 ~/.ssh/authorized_keys
+        chmod 700 ~/.ssh
+      env:
+        AUTH_KEY: ${{ secrets.AUTH_KEY }}
+    - run: sudo systemctl start ssh
+    - name: start ngrok
+      run: | 
+        curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+        | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+        && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
+        | sudo tee /etc/apt/sources.list.d/ngrok.list \
+        && sudo apt update \
+        && sudo apt install ngrok
+    - run: ngrok authtoken $NGROK_AUTH_TOKEN
+      env:
+        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+    - run: ngrok tcp 22
