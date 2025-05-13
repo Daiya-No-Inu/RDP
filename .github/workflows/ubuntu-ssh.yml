@@ -1,4 +1,4 @@
-name: linux-ssh
+name: ubuntu-ssh
 
 on: [workflow_dispatch]
 
