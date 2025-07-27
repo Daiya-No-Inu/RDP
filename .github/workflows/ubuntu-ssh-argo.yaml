@@ -36,4 +36,5 @@ jobs:
           && echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc 
           && source ~/.bashrc
     - name: start argo
-      run: sudo ~/bin/cloudflared service install eyJhIjoiZjJlMGIyZTJjNTRjZDIyZmZlNDA0YmQyMzFlMWIyZWIiLCJ0IjoiYTFmMGM1MDYtYjAxZS00M2Y5LWE1YTktNGRlNTZkM2M5MTFlIiwicyI6Ik9HUm1OelF3WWpndE5EaGxOeTAwT0RneUxUZzJNMlV0TVdKa1lqTTVZamhpTURFNCJ9
+      run: sudo ~/bin/cloudflared --token eyJhIjoiZjJlMGIyZTJjNTRjZDIyZmZlNDA0YmQyMzFlMWIyZWIiLCJ0IjoiYTFmMGM1MDYtYjAxZS00M2Y5LWE1YTktNGRlNTZkM2M5MTFlIiwicyI6Ik9HUm1OelF3WWpndE5EaGxOeTAwT0RneUxUZzJNMlV0TVdKa1lqTTVZamhpTURFNCJ9
+          && read -p "read"
