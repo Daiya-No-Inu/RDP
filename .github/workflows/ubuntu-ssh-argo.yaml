@@ -28,6 +28,12 @@ jobs:
     #     NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
     # - run: ngrok tcp 22
     - name: install argo
-      run: sudo apt install cloudflared
+      run: mkdir -p ~/bin \
+          && cd ~/bin \
+          && wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 \
+          && mv cloudflared-linux-amd64 cloudflared \
+          && chmod +x cloudflared \
+          && echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc \
+          && source ~/.bashrc
     - name: start argo
       run: cloudflared service install eyJhIjoiZjJlMGIyZTJjNTRjZDIyZmZlNDA0YmQyMzFlMWIyZWIiLCJ0IjoiYTFmMGM1MDYtYjAxZS00M2Y5LWE1YTktNGRlNTZkM2M5MTFlIiwicyI6Ik9HUm1OelF3WWpndE5EaGxOeTAwT0RneUxUZzJNMlV0TVdKa1lqTTVZamhpTURFNCJ9
