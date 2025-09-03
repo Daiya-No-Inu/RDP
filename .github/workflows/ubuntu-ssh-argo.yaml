@@ -36,4 +36,6 @@ jobs:
           && echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc 
           && source ~/.bashrc
     - name: start argo
-      run: ~/bin/cloudflared tunnel run --token 
+      run: ~/bin/cloudflared tunnel run --token $ARGO_TOKEN
+      env:
+        ARGO_TOKEN: ${{ secrets.ARGO_TOKEN_UBUNTU }}
